@@ -101,7 +101,7 @@ The training process is controlled by `config.yaml`. Key parameters include:
 - **`dataset`**: Paths to train/test data (`.npz` format).
 - **`transport`**: Flow matching configuration including path type (Linear/GVP/VP/Bridge), prediction type (velocity/noise/score), loss weighting, and stability parameters.
 - **`model`**: ViT architecture (`name`), image size, number of frames, conditioning probabilities, ECG usage.
-- **`training`**: Batch size, learning rate, optimizer, scheduler, checkpointing frequency, VAE model name (`stabilityai/sd-vae-ft-ema` by default).
+- **`training`**: Batch size, learning rate, optimizer, scheduler, checkpointing frequency, tokenizer name  (`cosmos_tokenizer_image_8x8` by default).
 - **`system`**: Number of workers, mixed precision usage, etc.
 
 ## Inference
@@ -138,20 +138,6 @@ python tools/evaluate_interpolation_fid.py /path/to/output_directory
 ```
 
 
-## Citation
-
-If you use this code for your research, please cite our paper:
-
-```bibtex
-@article{angio_film,
-  title={Angio-FILM: Video Frame Interpolation for Coronary Angiography using Latent Flow Matching},
-  author={[Your Name(s)]},
-  journal={[Journal/Conference]},
-  year={2024}
-  # Add more details once published
-}
-```
-
 ## Acknowledgements
 This repository uses components or pretrained weights from the following sources:
 
@@ -170,7 +156,3 @@ This project builds upon the following research:
 - [Classifier-Free Diffusion Guidance](https://arxiv.org/abs/2207.12598)
 - [Vision Transformers](https://arxiv.org/abs/2010.11929)
 - [Stochastic Interpolants: A Unifying Framework for Flows and Diffusions](https://arxiv.org/abs/2303.08797)
-
-## Contributors
-
-- [Your Name] - Project Lead
