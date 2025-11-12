@@ -1,0 +1,22 @@
+name: angio_film
+channels:
+  - pytorch
+  - nvidia
+dependencies:
+  - python>=3.10
+  - pytorch==2.5.1
+  - torchvision==0.20.1
+  - pip:
+    - opencv-python
+    - timm==1.0.15
+    - xformers==0.0.29
+    - diffusers[torch]==0.34.0
+    - tensorboard==2.19.0
+    - einops==0.8.1
+    - transformers==4.48.3
+    - scikit-image==0.25.2
+    - omegaconf==2.3.0
+    - torchdiffeq==0.2.5
+    - imageio[ffmpeg]
+    - pandas
+    - pyiqa

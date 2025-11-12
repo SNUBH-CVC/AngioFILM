@@ -1,0 +1,80 @@
+# All rights reserved.
+
+# This source code is licensed under the license found in the
+# LICENSE file in the root directory of this source tree.
+
+###############################################################################
+#                                  DATASET CONFIGURATION                            #
+###############################################################################
+dataset:
+  name: "snubh"              
+  train_path: "./data/SNUBH/train"
+
+###############################################################################
+#                                  TRANSPORT CONFIGURATION (SiT/Flow Matching)                         #
+###############################################################################
+transport:
+  path_type: "Linear"  # Linear, GVP, VP, etc.
+  prediction: "velocity"  # velocity, score, noise, etc.
+  loss_weight: null  # None, velocity, likelihood, etc.
+  train_eps: null  # Training epsilon
+  sample_eps: null  # Sampling epsilon
+  
+  # Initial point configuration for flow matching
+  x0_type: "gaussian"  # "gaussian" or "conditioning"
+  # - "gaussian": Use random Gaussian noise as x0 
+  # - "conditioning": Use conditioning frames (even frames) as x0
+
+###############################################################################
+#                                  MODEL CONFIGURATION                          #
+###############################################################################
+model:
+  # Model architecture
+  name: "Latte-XL/4"                      
+  image_size: 512  # normal coronary angiogram resolution
+  latent_size: 64  # 512 / 8
+  num_frames: 15  # assuming 60BPM(1 cardiac cycle per second), 15 frames = 1 second in a 15FPS video
+  frame_interval: 1                      
+  attention_bias: true                   
+
+  # Conditioning
+  mask_cond_prob: 0.1                    
+  use_ecg: true                        
+  ecg_signal_len: 100                   
+  ecg_mask_cond_prob: 0.1
+
+###############################################################################
+#                                  TRAINING CONFIGURATION                      #
+###############################################################################
+training:
+  # Training parameters
+  batch_size: 4   # VIDIM: 256/512
+  max_train_steps: 500000  # VIDIM: 500000
+  global_seed: 3407                      
+  
+  # Optimizer settings
+  base_lr: 1e-4  # Latte
+  lr_scheduler: "linear"  # VIDIM
+  lr_warmup_steps: 10000  # VIDIM
+  betas: [0.9, 0.999]  # VIDIM
+  clip_max_norm: 1.0  # VIDIM
+  
+  # Logging and checkpoints
+  results_dir: "./work_dirs"             
+  log_every: 100                         
+  ckpt_every: 10000
+  
+  # Loading pre-trained models
+  pretrained_model_path: null                      
+  tokenizer_name: "cosmos_tokenizer_image_8x8"
+
+###############################################################################
+#                                  SYSTEM CONFIGURATION                        #
+###############################################################################
+system:
+  num_workers: 8
+  mixed_precision: true
+  use_compile: true
+  compile_mode: "default"               
+  enable_xformers_memory_efficient_attention: false  
+  gradient_checkpointing: false          

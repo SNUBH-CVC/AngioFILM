@@ -1,0 +1,43 @@
+{
+  "name": "AngioFILM Development Environment",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": "..",
+    "args": {
+      "USERNAME": "user",
+      "USER_UID": "1000",
+      "USER_GID": "1000"
+    }
+  },
+  "runArgs": ["--gpus", "all", "--shm-size=32G"],
+  "workspaceFolder": "/workspaces/AngioFILM",
+  "mounts": [
+    "source=/path/to/train/data/directory,target=/workspaces/AngioFILM/data/train,type=bind,consistency=cached",
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"
+  ],
+  "containerEnv": {
+    "DISPLAY": "${localEnv:DISPLAY}"
+  },
+  "remoteUser": "user",
+  "postCreateCommand": "echo 'Dev Container started sccessfully'",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.pylint",
+        "ms-toolsai.jupyter"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/conda/bin/python",
+        "python.terminal.activateEnvironment": true
+      }
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  "shutdownAction": "stopContainer",
+  "initializeCommand": "echo 'Initializing Dev Container...'",
+  "forwardPorts": [],
+  "portsAttributes": {}
+}

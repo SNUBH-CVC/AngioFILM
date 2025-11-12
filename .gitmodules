@@ -1,0 +1,3 @@
+[submodule "Cosmos-Tokenizer"]
+	path = Cosmos-Tokenizer
+	url = https://github.com/NVIDIA/Cosmos-Tokenizer
