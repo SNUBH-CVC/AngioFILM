@@ -117,6 +117,8 @@ python sample.py \
     --save_mp4 True \
 ```
 
+The model checkpoints are not publicly available. For any academic inquiries regarding the model parameters, please contact the corresponding author.
+
 **Arguments:**
 
 - `ckpt_path`: Path to the trained model checkpoint (`.pt` file). The script expects the corresponding `config.yaml` to be in the parent directory of the checkpoint's parent directory (e.g., `work_dirs/experiment_name/config.yaml` if checkpoint is `work_dirs/experiment_name/checkpoints/model.pt`).
